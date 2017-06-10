@@ -1,0 +1,288 @@
+﻿
+@{
+    ViewBag.Title = "Public";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+<!--
+<div ng-controller="profilePictureController as pic">
+    <div ng-repeat="p in pic.userFiles">
+        <img class="cropArea" ng-src="" />
+    </div>
+</div>
+    -->
+
+<br />
+<input type="hidden" id="manageId" value="@Model.Item" />
+
+<div class="container" ng-controller="profilePageController as pro" ng-cloak>
+
+    <div class="row">
+
+        <div class="col-md-2 col-sm-2"></div>
+
+        <!-- INFORMATION CONTAINER -->
+        <div class="col-md-8 col-sm-8 buttons rounded">
+
+            <div class="text-center">
+                <br />
+                <img ng-src="{{ pro.picUrl }}" id="imageContainer" class="image" />
+                <h1 class="name text-center">{{ pro.profile.personFirstName + " " + pro.profile.personLastName }}</h1>
+                <message-modal ng-show="pro.userPersonId != pro.personId" modal-template="~/Scripts/sabio/send-message-modal/sendPMmodal.html" modal-ctrl="ModalInstanceCtrl"></message-modal>
+
+            </div>
+
+            <hr />
+            <div class="text-center">
+                <div class="btn-group">
+                    <a href="" class="pad" ng-click="pro.showAbout()">About Me</a>
+                    <a href="" class="pad" ng-show="pro.whBtn" ng-click="pro.showWork()">Work History</a>
+                    <a href="" class="pad" ng-show="pro.edBtn" ng-click="pro.showEd()">Education</a>
+                    <a href="" class="pad" ng-show="pro.skBtn" ng-click="pro.showSkill()">Skills</a>
+                    <a href="" class="pad" ng-show="pro.jobBtn" ng-click="pro.showJob()">Jobs</a>
+                </div>
+
+            </div>
+            <hr />
+
+            <!-- ABOUT ME -->
+            <div class="infoBox" id="aboutMe" style="position: relative" ng-show="pro.aboutMode">
+                <p class="text-center" ng-bind-html="pro.profile.personAbout"></p>
+            </div>
+
+            <!-- WORK HISTORY -->
+            <div class="infoBox" id="workHistory" ng-show="pro.whMode">
+                <div style="font-size: 15px" ng-repeat="c in pro.profile.company">
+                    <p><strong>Company: </strong>{{ c.company }}</p>
+                    <p><strong>Title: </strong>{{ c.title }}</p>
+                    <p>{{ c.description }}</p>
+                    <hr />
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div class="infoBox" id="education" ng-show="pro.edMode">
+                <div style="font-size: 18px" ng-repeat="e in pro.profile.school">
+                    <p><strong>Subject: </strong>{{ e.subject }}</p>
+                    <p><strong>School: </strong>{{ e.school }}</p>
+                    <p>{{ e.city + ", " + e.state }}</p>
+                    <hr />
+                </div>
+            </div>
+
+            <!-- SKILLS -->
+            <div class="infoBox text-center" id="skills" ng-show="pro.skillMode">
+                <div ng-repeat="s in pro.profile.skills" style="display: inline-block">
+                    <div class="skillTag btn" data-toggle="popover" title="Description" data-content="{{s.description}}"
+                         data-trigger="hover" data-placement="bottom" ng-mouseenter="hover=true" ng-mouseleave="hover=false">{{s.name}}</div>
+                </div>
+            </div>
+
+            <!-- JOBS -->
+            <div class="infoBox" id="jobs" ng-show="pro.jobMode">
+                <div style="font-size: 18px" dir-paginate="j in pro.profile.recruiterJobs | itemsPerPage:5">
+                    <row>
+                        <div class="col-md-12 text-left">
+                            <a href="/Jobs/Option/{{j.recruiterJobId}}"><h3>{{ j.title }}</h3></a>
+                        </div>
+                    </row>
+                    <row>
+                        <div class="col-md-0 col-xs-0"></div>
+                        <div class="col-md-6 col-xs-7 text-left">
+                            <h6>{{ j.companyName }}</h6>
+                            <h6>{{ j.companyLocation }}</h6>
+                        </div>
+                        <div class="col-md-6 col-xs-5 text-right">
+                            <h6>{{ j.companyIndustry }}</h6>
+                            <h6>{{ j.type }}</h6>
+                            <h6>{{ j.salary | currency}}</h6>
+                        </div>
+                        <div class="col-md-0 col-xs-0"></div>
+                    </row>
+                    <row>
+                        <div class="col-md-12">
+                            <p ng-bind-html="j.description | cut : true : 300 : ' ...'"></p>
+                            <hr />
+                        </div>
+                    </row>
+                </div>
+                <div class="col-md-12 text-center">
+                    <dir-pagination-controls></dir-pagination-controls>
+                </div>
+            </div>
+            <div class="row text-center" style="vertical-align: middle">
+                <form class="form-inline" ng-submit="pro.searchUser()">
+                    <input type="text" class="form-control" ng-model="pro.searchQuery" placeholder="Search Profiles" />
+                    <input type="button" class="btn btn-cta-secondary" value="Search" ng-click="pro.searchUser()" />
+                </form>
+            </div>
+            <br />
+        
+        </div><!-- col-md-8 -->
+
+        <div class="col-md-2 col-sm-2"></div>
+
+    </div><!-- row -->
+
+</div>
+
+<br />
+
+
+@section stylesheets {
+    <style>
+        .name {
+            font-size: 40px;
+            font-style: italic;
+            font-weight: bold;
+            font-family: "Georgia", Times, serif;
+        }
+
+        .editBtn {
+            position: absolute;
+            right: 0;
+            bottom: 50px;
+        }
+
+             .popover {
+            text-decoration: none;
+            color: black;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            display: block;
+            padding: 0px 20px;
+            border-color: #755037;
+            border-width: 2px 2px 2px 2px;
+        }
+
+        .popover-title {
+            display: block;
+            border-color: #B1A18F;
+            border-width: 3px 3px 3px 3px;
+            background-color: white;
+        }
+
+        .popover.bottom .arrow:after {
+            border-bottom-color:  #755037;
+        }
+
+        .skillTag {
+            background-color: #755037;
+            border: none;
+            color: white;
+            padding: 7px 7px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 3px;
+        }
+
+        skill-tags {
+            width: 200px;
+        }
+
+        .pad {
+            padding: 7px;
+            color: black;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .infoBox {
+            background: white;
+            /*opacity: 0.95;*/
+            transition: opacity .5s linear;
+            height: auto;
+            min-height: 550px;
+            height: auto !important; /* for IE as it does not support min-height */
+            height: 30px; /* for IE as it does not support min-height */
+        }
+
+        .buttons {
+            /*opacity: 0.95;*/
+            background: white;
+            transition: opacity .5s linear;
+        }
+
+        .ng-hide {
+            display: none !important;
+        }
+
+        .image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /*don't forget prefixes*/
+            background-position: center center;
+            /* as mentioned by Vad: */
+            background-size: cover;
+        }
+
+        .cropArea {
+            background: white;
+            overflow: hidden;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+        }
+    </style>
+}
+
+@section scripts {
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.ckeditor.js"></script>
+
+    <script src="~/Scripts/sabio/core/services/sabio.services.settings.js"></script>
+
+    <script src="~/Scripts/sabio/core/service-factories/sabio.service.factory.settings.js"></script>
+
+
+    <script src="~/Scripts/sabio/core/controllers/sabio.controller.privacysettings.js"></script>
+
+    <script src="~/Scripts/sabio/core/services/sabio.services.profilePage.js"></script>
+    <script src="~/Scripts/sabio/core/controllers/sabio.controllers.profilePage.js"></script>
+    <script src="~/Scripts/sabio/core/service-factories/sabio.services.factory.profilePage.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.skilltags.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.education.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.workHistory.js"></script>
+    <script src="~/Scripts/sabio/sabio.services.user.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.searchUser.js"></script>
+    <script src="~/Scripts/sabio/sabio.services.fileUpload.js"></script>
+
+    <!-- Send Message -->
+    @*<script src="~/Scripts/sabio/sabio.services.user.js"></script>
+        <script src="~/Scripts/sabio/core/directives/sabio.directive.searchUser.js"></script>*@
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.sendMessage.js"></script>
+    <script src="~/Scripts/sabio/core/service-factories/sabio.service.factory.messages.js"></script>
+    <script src="~/Scripts/sabio/sabio.services.messages.js"></script>
+
+    <script>
+        // MINIMIZE.... FILTER
+        angular.module('sabioApp').filter('cut', function () {
+            return function (value, wordwise, max, tail) {
+                if (!value) return '';
+
+                max = parseInt(max, 10);
+                if (!max) return value;
+                if (value.length <= max) return value;
+
+                value = value.substr(0, max);
+                if (wordwise) {
+                    var lastspace = value.lastIndexOf(' ');
+                    if (lastspace !== -1) {
+                        //Also remove . and , so its gives a cleaner result.
+                        if (value.charAt(lastspace - 1) === '.' || value.charAt(lastspace - 1) === ',') {
+                            lastspace = lastspace - 1;
+                        }
+                        value = value.substr(0, lastspace);
+                    }
+                }
+
+                return value + (tail || ' …');
+            };
+        });
+    </script>
+
+}

@@ -1,0 +1,514 @@
+﻿@{
+    ViewBag.Title = "Landing";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+@section stylesheets {
+    <style>
+               .popover {
+            text-decoration: none;
+            color: black;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            display: block;
+            padding: 0px 20px;
+            border-color: #755037;
+            border-width: 2px 2px 2px 2px;
+        }
+
+        .popover-title {
+            display: block;
+            border-color: #B1A18F;
+            border-width: 3px 3px 3px 3px;
+            background-color: white;
+        }
+
+        .popover.bottom .arrow:after {
+            border-bottom-color:  #755037;
+        }
+
+
+        .skillTag {
+            background-color: #755037;
+            border: none;
+            color: white;
+            padding: 7px 7px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 3px;
+        }
+
+        .image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%; /*don't forget prefixes*/
+            background-position: center center;
+            /* as mentioned by Vad: */
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .pester {
+            border-style: outset;
+            background-color: white;
+        }
+
+        .name {
+        }
+
+        .green {
+            color: #17b74d;
+        }
+
+        .panel-heading {
+            cursor: pointer;
+            z-index: -3;
+        }
+    </style>
+}
+
+<br />
+<div ng-controller="landingController as lc">
+    <div class="container-fluid" ng-cloak>
+        <div class="row">
+
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4 well">
+
+                <!-- PICTURE AND NAME -->
+                <img ng-src="{{ lc.picUrl }}" id="imageContainer" class="image center-block" ng-show="lc.userFiles" ng-click="lc.editPic()" />
+                <img ng-src="/public-assets/images/people/defaultAvatar.jpg" id="imageContainer" class="image center-block" ng-show="!lc.userFiles" ng-click="lc.editPic()" />
+                <div class="text-center" style="vertical-align: middle">
+                    <h1 id="name">{{ lc.item.personFirstName ? lc.item.personFirstName + " " + lc.item.personLastName : ' ' }}</h1>
+                </div>
+
+                @*
+                        <!-- CREATE PROFILE ALERT -->
+                        <div class="container pester" ng-show="(lc.personId == '0') ? true : false">
+                            <br />
+                            <div class="btn-group-xs text-center ">
+
+                                <a href="/peopleng/create" class="btn"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span><strong>Create Profile</strong></a>
+
+                            </div>
+                            <br />
+
+                            <div class="text-center">You do not have a profile.  Click the 'Create Profile' button to start!</div>
+                        </div>
+                        <br />
+
+                                                                                    <!-- ABOUT ME ALERT -->
+                    <div class="container pester" ng-show="(lc.item.personAbout == null) && (lc.personId > 0) ? true : false">
+                        <br />
+                        <div class="btn-group-xs text-center ">
+                            <h2>
+                                <a href="/aboutme/Create" class="btn"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span><strong>ADD ABOUT ME</strong></a>
+                            </h2>
+                        </div>
+                        <br />
+
+                        <div class="text-center">You haven't filled out an About Me yet! Click the add button to add an About Me to your profile.</div>
+                        <a href="#" class="btn fa-pull-right" ng-click="lc.skipAbout()"><i class="fa"></i><span class="glyphicon"></span><strong>SKIP</strong></a>
+                    </div>
+                    <br />
+
+                    <!-- WORK HISTORY ALERT -->
+                    <div class="container pester" ng-show="(lc.item.company.length == 0 || null) &&(lc.personId > 0) ? true : false">
+                        <br />
+                        <div class="btn-group-xs text-center ">
+                            <h2>
+                                <a href="/workhistoryng/Create" class="btn"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span><strong>ADD WORK HISTORY</strong></a>
+                            </h2>
+                        </div>
+                        <br />
+
+                        <div class="text-center">You haven't filled out your work history yet! Click the add button to add a work history to your profile.</div>
+                        <a href="#" class="btn fa-pull-right" ng-click="lc.skipWork()"><i class="fa"></i><span class="glyphicon"></span><strong>SKIP</strong></a>
+                    </div>
+                    <br />
+
+                    <!-- EDUCATION ALERT -->
+                    <div class="container pester" ng-show="(lc.item.school.length == 0 || null) &&(lc.personId > 0)  ? true : false">
+                        <br />
+                        <div class="btn-group-xs text-center ">
+                            <h2>
+                                <a href="/educationNg/create" class="btn"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span><strong> ADD EDUCATION</strong></a>
+                            </h2>
+                        </div>
+                        <br />
+
+                        <div class="text-center">You haven't filled out your education yet! Click the add button to add your education to your profile.</div>
+                        <a href="#" class="btn fa-pull-right" ng-click="lc.skipEd()"><i class="fa"></i><span class="glyphicon"></span><strong>SKIP</strong></a>
+                    </div>
+                    <br />
+
+                    <!-- SKILLS ALERT -->
+                    <div class="container pester" ng-show="(lc.item.skills.length == 0 || null)  &&(lc.personId > 0) ? true : false">
+                        <br />
+                        <div class="btn-group-xs text-center ">
+                            <h2 class="outset">
+                                <a href="/skilltagng/manage" class="btn"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span><strong> ADD SKILLS</strong></a>
+                            </h2>
+
+                        </div>
+                        <br />
+
+                        <div class="text-center">You haven't filled out your skills yet! Click the add button to add your skills to your profile.</div>
+                        <a href="#" class="btn fa-pull-right" ng-click="lc.skipSkills()"><i class="fa"></i><span class="glyphicon"></span><strong>SKIP</strong></a>
+
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                    <br />
+
+                        ng-show="lc.item.school.length > 0 ? true : false"'
+                        ng-show="lc.item.personAbout != null ? true : false"
+                        ng-show="lc.item.company.length > 0 ? true : false"
+                        ng-show="lc.item.school.length > 0 ? true : false"
+                        ng-show="lc.item.skills.length > 0 ? true : false"
+                *@
+
+
+                <!-- TABS -->
+                <div ng-show="lc.personCheck()">
+
+                    <!-- GENERAL INFORMATION -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#genCollapse">
+                            <a href="#genCollapse" class="btn accordion-toggle"><i class="fa"></i><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                            General Info
+                            <a ng-click="lc.editPerson()" class="btn fa-pull-right"><i class="fa"></i><span class="glyphicon glyphicon-pencil"></span> EDIT</a>
+                        </div>
+                        <div id="genCollapse" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <strong>Name:</strong> {{ lc.item.personFirstName ? lc.item.personFirstName + " " + lc.item.personLastName : ' ' }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABOUT ME -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#aboutCollapse">
+                            <a href="#aboutCollapse" class="btn accordion-toggle"><i class="fa"></i><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                            About Me
+                            <a ng-click="lc.editAbout()" class="btn fa-pull-right"><i class="fa"></i><span class="glyphicon glyphicon-pencil"></span> EDIT</a>
+                        </div>
+                        <div id="aboutCollapse" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="text-center" ng-bind-html="lc.item.personAbout"></div><br />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WORK HISTORY -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#workCollapse">
+                            <a href="#workCollapse" class="btn accordion-toggle"><i class="fa"></i><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                            Work History
+                            <a ng-click="lc.addWorkHistory()" class="btn fa-pull-right"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span> ADD</a>
+                        </div>
+                        <div id="workCollapse" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <work-history></work-history>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDUCATION -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#edCollapse">
+                            <a href="#edCollapse" class="btn accordion-toggle"><i class="fa"></i><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                            Education
+                            <a ng-click="lc.addEducation()" class="btn fa-pull-right"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span> ADD</a>
+                        </div>
+                        <div id="edCollapse" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <education></education>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SKILLS -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#skillCollapse">
+                            <a href="#skillCollapse" class="btn accordion-toggle"><i class="fa"></i><span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                            Skills
+                            <a ng-click="lc.addSkills()" class="btn fa-pull-right"><i class="fa"></i><span class="glyphicon glyphicon-plus"></span> ADD</a>
+                        </div>
+                        <div id="skillCollapse" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <skill-tags></skill-tags>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- tabs -->
+                <div class="text-center" style="vertical-align: middle">
+                    <form class="form-inline" ng-submit="lc.searchUser()">
+                        <input type="text" class="form-control" ng-model="lc.searchQuery" placeholder="Search Profiles" />
+                        <input type="button" class="btn btn-cta-secondary" value="Search" ng-click="lc.searchUser()" />
+                    </form>
+                </div>
+            </div><!-- col-md-8 -->
+
+            <div class="col-md-4"></div>
+
+
+
+        </div><!-- Row -->
+    </div><!-- Container Fluid -->
+    <!-- CREATE PERSON MODAL-->
+    <div ng-cloak>
+        <div class="modal fade in" id="personModal" aria-hidden="false" style="display: block;" ng-show="(lc.personId == '0') ? true : false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Create Your Basic Profile</h1>
+                            </div>
+                            <div class="panel-body" ng-controller="peopleManageController as people">
+
+                                <form name="peopleForm" ng-submit="people.submitForm(peopleForm.$valid)" novalidate>
+                                    <div class="form-group" ng-class="{ 'has-error' : peopleForm.firstName.$invalid && !peopleForm.firstName.$untouched }">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" maxlength="50" name="firstName" placeholder="Enter first name"
+                                               ng-model="people.item.firstName" ng-value="people.item.firstName" ng-pattern="/^[a-zA-Z\s]*$/" required>
+                                        <p ng-show="peopleForm.firstName.$invalid && !peopleForm.firstName.$untouched" class="help-block">Please enter a valid first name.</p>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error' : peopleForm.middleInitial.$invalid && !peopleForm.middleInitial.$untouched }">
+                                        <label for="middleInitial">Middle Initial</label>
+                                        <input type="text" class="form-control" id="middleInitial" placeholder="Enter middle initial" maxlength="1" name="middleInitial"
+                                               ng-model="people.item.middleInitial" ng-value="people.item.middleInitial" ng-pattern="/^[a-zA-Z\s]*$/" />
+                                        <p ng-show="peopleForm.middleInitial.$invalid && !peopleForm.middleInitial.$pristine" class="help-block">Please enter a valid middle initial.</p>
+                                    </div>
+                                    <div class="form-group" ng-class="{ 'has-error' : peopleForm.lastName.$invalid && !peopleForm.lastName.$untouched }">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" maxlength="50" name="lastName"
+                                               ng-model="people.item.lastName" ng-value="people.item.lastName" ng-pattern="/^[a-zA-Z\s]*$/" required />
+                                        <p ng-show="peopleForm.lastName.$invalid && !peopleForm.lastName.$untouched" class="help-block">Please enter a valid last name.</p>
+                                    </div>
+                                    @*<div class="form-group" ng-class="{ 'has-error' : peopleForm.dob.$invalid && !peopleForm.dob.$untouched }">
+                                        <label for="dob">Date of Birth</label>
+                                        <input type="date" class="form-control" id="dob" placeholder="Enter date of birth" name="dob"
+                                               ng-model="people.item.dob" ng-value="people.item.dob"
+                                               max="{{people.maxBirthdate | date : 'yyyy-MM-dd'}}"
+                                               min="{{people.minBirthdate | date: 'yyyy-MM-dd'}}"
+                                               ng-pattern="/^((\d{4})-(\d{2})-(\d{2})|(\d{2})\/(\d{2})\/(\d{4}))$/" required />
+                                        <p ng-show="peopleForm.dob.$invalid && !peopleForm.dob.$untouched" class="help-block">Please enter a valid birthdate.</p>
+                                    </div>*@
+                                    <button type="submit" class="btn btn-cta btn-cta-primary" ng-disabled="peopleForm.$invalid">Submit</button>
+                                </form>
+
+                            </div><!--Panel Body-->
+                            <div class="panel-footer">
+                            </div>
+                        </div><!--Panel-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- controller div -->
+
+@section scripts {
+
+    <script src="~/Scripts/sabio/sabio.services.people.js"></script>
+    <script src="~/Scripts/sabio/core/services/sabio.services.peoplefactory.js"></script>
+    <script src="~/Scripts/sabio/core/controllers/sabio.controllers.peoplemanage.js"></script>
+    <script src="~/Scripts/sabio/sabio.services.fileUpload.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.education.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.skilltags.js"></script>
+    <script src="~/Scripts/sabio/core/directives/sabio.directive.workHistory.js"></script>
+    <script src="~/Scripts/sabio/sabio.services.user.js"></script>
+    <script src="~/Scripts/sabio/core/services/sabio.services.userFactory.js"></script>
+    <script type="text/javascript">
+
+        // LANDING CONTROLLER
+        (function () {
+            "use strict";
+
+            angular.module('sabioApp')
+            .controller('landingController', LandingController);
+
+            LandingController.$inject = ['$scope', '$baseController', '$landingService', '$fileUploadService', '$sce', 'toastr', '$userService'];
+
+            function LandingController($scope, $baseController, $landingService, $fileUploadService, $sce, $toastr, $userService, ngImgCrop) {
+                var vm = this;
+
+                vm.$scope = $scope;
+                $baseController.merge(vm, $baseController);
+                vm.$landingService = $landingService;
+                vm.$userService = $userService;
+
+
+                //Image
+                vm.$fileUploadService = $fileUploadService;
+                vm.ngImgCrop = ngImgCrop;
+                vm.Image = "";
+                vm.CroppedImage = "";
+                vm.userFiles = null;
+                vm.getFilesSuccess = _getFilesSuccess;
+                vm.editPic = _editPic;
+                vm.file = {};
+                vm.picUrl = "";
+
+                vm.item = null;
+
+                vm.personCheck = _personCheck;
+                vm.getInfoSuccess = _getInfoSuccess;
+
+                vm.personId = sabio.page.personId;
+
+                vm.skipAbout = _skipAbout;
+                vm.skipEd = _skipEd;
+                vm.skipWork = _skipWork;
+                vm.skipSkills = _skipSkills;
+                vm.editPerson = _editPerson;
+                vm.editAbout = _editAbout;
+                vm.addWorkHistory = _addWorkHistory;
+                vm.addEducation = _addEducation;
+                vm.addSkills = _addSkills;
+                vm.notify = vm.$landingService.getNotifier($scope);
+                vm.searchUser = _searchUser;
+                vm.searchQuery = null;
+                vm.getSearchSuccess = _getSearchSuccess;
+
+                render();
+
+                function render() {
+                    vm.$landingService.getByPersonId(vm.personId, vm.getInfoSuccess);
+                    vm.$fileUploadService.getByPersonId(sabio.page.personId, vm.getFilesSuccess);
+                }
+
+                //image section
+                function _getFilesSuccess(data, textStatus, jqXHR) {
+                    vm.notify(function () {
+                        vm.userFiles = data.items;
+                        if(data.items){
+                            console.log(vm.userFiles);
+                            for (var i = 0; i < vm.userFiles.length; i++) {
+                                if (vm.userFiles[i].fileUrl.substring(0, 14) == "ProfilePicture") {
+                                    vm.picUrl = "https://sabio-training.s3-us-west-2.amazonaws.com/C30/" + vm.userFiles[i].fileUrl;
+                                    console.log(vm.picUrl);
+                                    break;
+                                } else {
+                                    vm.picUrl = "/public-assets/images/people/defaultAvatar.jpg"
+                                }
+                        }
+                    }});
+
+                }
+
+                function _editPic() {
+                    location.href = "/profile/picture"
+                }
+
+                angular.element(document.querySelector('#fileInput')).on('change', vm.handleFileSelect);
+                //end image section
+
+
+                function _personCheck() {
+                    if (vm.personId == 0 || vm.personId == undefined)
+                        return false;
+                    else {
+                        return true;
+                    }
+                }
+
+                function _getInfoSuccess(data, textStatus, jqXHR) {
+                    vm.notify(function () {
+                        vm.item = data;
+
+                        //console.log(vm.item);
+                    }
+                    );
+                }
+
+                function _skipAbout() {
+                    vm.item.personAbout = "";
+                }
+
+                function _skipEd() {
+                    vm.item.school.length = 2;
+                }
+
+                function _skipWork() {
+                    vm.item.company.length = 2;
+                }
+
+                function _skipSkills() {
+                    vm.item.skills.length = 2;
+                }
+
+                function _editPerson() {
+                    window.location.href = '/peopleng/' + sabio.page.personId;
+                }
+
+                function _editAbout() {
+                    window.location.href = '/aboutme/create';
+                }
+
+                function _addWorkHistory() {
+                    window.location.href = '/workhistoryng/create'
+                }
+
+                function _addEducation() {
+                    window.location.href = '/educationng/create'
+                }
+
+                function _addSkills() {
+                    window.location.href = '/skilltagng/manage'
+                }
+
+                function _searchUser() {
+                    if (vm.searchQuery != null) {
+                        vm.$userService.userSearchUser(vm.searchQuery, sabio.page.personId, _getSearchSuccess);
+                    }
+                    else {
+                        $toastr.error("You didn't search anyone.");
+                    }
+                }
+                function _getSearchSuccess() {
+                    self.location = "/ProfilePageNg/" + vm.searchQuery + "/Search"
+                }
+            }
+
+        })();
+
+        // LANDING SERVICE FACTORY
+        (function () {
+            "use strict";
+
+            angular.module('sabioApp')
+            .factory('$landingService', LandingServiceFactory);
+
+            LandingServiceFactory.$inject = ['$baseService', '$sabio'];
+
+            function LandingServiceFactory($baseService, $sabio) {
+                var aSabioServiceObject = sabio.services.landing;
+
+                var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+
+                return newService;
+            }
+
+        })();
+
+        sabio.services.landing = sabio.services.landing || {};
+
+        //Get profile
+        sabio.services.landing.getByPersonId = function (personId, onSuccess, onError) {
+            sabio.page.sendAjax("profile/home/" + personId, sabio.page.ajaxType.GET, null, onSuccess)
+        }
+
+    </script>
+
+}
