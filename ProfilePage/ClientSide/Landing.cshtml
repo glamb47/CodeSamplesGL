@@ -320,22 +320,22 @@
 
 @section scripts {
 
-    <script src="~/Scripts/sabio/sabio.services.people.js"></script>
-    <script src="~/Scripts/sabio/core/services/sabio.services.peoplefactory.js"></script>
-    <script src="~/Scripts/sabio/core/controllers/sabio.controllers.peoplemanage.js"></script>
-    <script src="~/Scripts/sabio/sabio.services.fileUpload.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.education.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.skilltags.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.workHistory.js"></script>
-    <script src="~/Scripts/sabio/sabio.services.user.js"></script>
-    <script src="~/Scripts/sabio/core/services/sabio.services.userFactory.js"></script>
+    <script src="~/Scripts/aic/aic.services.people.js"></script>
+    <script src="~/Scripts/aic/core/services/aic.services.peoplefactory.js"></script>
+    <script src="~/Scripts/aic/core/controllers/aic.controllers.peoplemanage.js"></script>
+    <script src="~/Scripts/aic/aic.services.fileUpload.js"></script>
+    <script src="~/Scripts/aic/core/directives/aic.directive.education.js"></script>
+    <script src="~/Scripts/aic/core/directives/aic.directive.skilltags.js"></script>
+    <script src="~/Scripts/aic/core/directives/aic.directive.workHistory.js"></script>
+    <script src="~/Scripts/aic/aic.services.user.js"></script>
+    <script src="~/Scripts/aic/core/services/aic.services.userFactory.js"></script>
     <script type="text/javascript">
 
         // LANDING CONTROLLER
         (function () {
             "use strict";
 
-            angular.module('sabioApp')
+            angular.module('aicApp')
             .controller('landingController', LandingController);
 
             LandingController.$inject = ['$scope', '$baseController', '$landingService', '$fileUploadService', '$sce', 'toastr', '$userService'];
@@ -365,7 +365,7 @@
                 vm.personCheck = _personCheck;
                 vm.getInfoSuccess = _getInfoSuccess;
 
-                vm.personId = sabio.page.personId;
+                vm.personId = aic.page.personId;
 
                 vm.skipAbout = _skipAbout;
                 vm.skipEd = _skipEd;
@@ -385,7 +385,7 @@
 
                 function render() {
                     vm.$landingService.getByPersonId(vm.personId, vm.getInfoSuccess);
-                    vm.$fileUploadService.getByPersonId(sabio.page.personId, vm.getFilesSuccess);
+                    vm.$fileUploadService.getByPersonId(aic.page.personId, vm.getFilesSuccess);
                 }
 
                 //image section
@@ -396,7 +396,7 @@
                             console.log(vm.userFiles);
                             for (var i = 0; i < vm.userFiles.length; i++) {
                                 if (vm.userFiles[i].fileUrl.substring(0, 14) == "ProfilePicture") {
-                                    vm.picUrl = "https://sabio-training.s3-us-west-2.amazonaws.com/C30/" + vm.userFiles[i].fileUrl;
+                                    vm.picUrl = "https://aic-training.s3-us-west-2.amazonaws.com/C30/" + vm.userFiles[i].fileUrl;
                                     console.log(vm.picUrl);
                                     break;
                                 } else {
@@ -449,7 +449,7 @@
                 }
 
                 function _editPerson() {
-                    window.location.href = '/peopleng/' + sabio.page.personId;
+                    window.location.href = '/peopleng/' + aic.page.personId;
                 }
 
                 function _editAbout() {
@@ -470,7 +470,7 @@
 
                 function _searchUser() {
                     if (vm.searchQuery != null) {
-                        vm.$userService.userSearchUser(vm.searchQuery, sabio.page.personId, _getSearchSuccess);
+                        vm.$userService.userSearchUser(vm.searchQuery, aic.page.personId, _getSearchSuccess);
                     }
                     else {
                         $toastr.error("You didn't search anyone.");
@@ -487,26 +487,26 @@
         (function () {
             "use strict";
 
-            angular.module('sabioApp')
+            angular.module('aicApp')
             .factory('$landingService', LandingServiceFactory);
 
-            LandingServiceFactory.$inject = ['$baseService', '$sabio'];
+            LandingServiceFactory.$inject = ['$baseService', '$aic'];
 
-            function LandingServiceFactory($baseService, $sabio) {
-                var aSabioServiceObject = sabio.services.landing;
+            function LandingServiceFactory($baseService, $aic) {
+                var aAicServiceObject = aic.services.landing;
 
-                var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+                var newService = $baseService.merge(true, {}, aAicServiceObject, $baseService);
 
                 return newService;
             }
 
         })();
 
-        sabio.services.landing = sabio.services.landing || {};
+        aic.services.landing = aic.services.landing || {};
 
         //Get profile
-        sabio.services.landing.getByPersonId = function (personId, onSuccess, onError) {
-            sabio.page.sendAjax("profile/home/" + personId, sabio.page.ajaxType.GET, null, onSuccess)
+        aic.services.landing.getByPersonId = function (personId, onSuccess, onError) {
+            aic.page.sendAjax("profile/home/" + personId, aic.page.ajaxType.GET, null, onSuccess)
         }
 
     </script>
