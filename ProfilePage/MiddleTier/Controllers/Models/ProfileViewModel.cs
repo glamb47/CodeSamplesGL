@@ -1,11 +1,11 @@
-﻿using Sabio.Web.Domain;
+﻿using aic.Web.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Sabio.Web.Models.ViewModels
+namespace aic.Web.Models.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {
