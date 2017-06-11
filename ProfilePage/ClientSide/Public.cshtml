@@ -28,7 +28,7 @@
                 <br />
                 <img ng-src="{{ pro.picUrl }}" id="imageContainer" class="image" />
                 <h1 class="name text-center">{{ pro.profile.personFirstName + " " + pro.profile.personLastName }}</h1>
-                <message-modal ng-show="pro.userPersonId != pro.personId" modal-template="~/Scripts/sabio/send-message-modal/sendPMmodal.html" modal-ctrl="ModalInstanceCtrl"></message-modal>
+                <message-modal ng-show="pro.userPersonId != pro.personId" modal-template="~/Scripts/aic/send-message-modal/sendPMmodal.html" modal-ctrl="ModalInstanceCtrl"></message-modal>
 
             </div>
 
@@ -231,36 +231,28 @@
 }
 
 @section scripts {
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.ckeditor.js"></script>
-
-    <script src="~/Scripts/sabio/core/services/sabio.services.settings.js"></script>
-
-    <script src="~/Scripts/sabio/core/service-factories/sabio.service.factory.settings.js"></script>
-
-
-    <script src="~/Scripts/sabio/core/controllers/sabio.controller.privacysettings.js"></script>
-
-    <script src="~/Scripts/sabio/core/services/sabio.services.profilePage.js"></script>
-    <script src="~/Scripts/sabio/core/controllers/sabio.controllers.profilePage.js"></script>
-    <script src="~/Scripts/sabio/core/service-factories/sabio.services.factory.profilePage.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.skilltags.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.education.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.workHistory.js"></script>
-    <script src="~/Scripts/sabio/sabio.services.user.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.searchUser.js"></script>
-    <script src="~/Scripts/sabio/sabio.services.fileUpload.js"></script>
+    <script src="~/Scripts/aic/core/directives/aic.directive.ckeditor.js"></script>
+    <script src="~/Scripts/aic/core/services/aic.services.settings.js"></script>
+    <script src="~/Scripts/aic/core/service-factories/aic.service.factory.settings.js"></script>
+    <script src="~/Scripts/aic/core/controllers/aic.controller.privacysettings.js"></script>
+    <script src="~/Scripts/aic/core/services/aic.services.profilePage.js"></script>
+    <script src="~/Scripts/aic/core/controllers/aic.controllers.profilePage.js"></script>
+    <script src="~/Scripts/aic/core/service-factories/aic.services.factory.profilePage.js"></script>
+    <script src="~/Scripts/aic/aic.services.user.js"></script>
+    <script src="~/Scripts/aic/core/directives/aic.directive.searchUser.js"></script>
+    <script src="~/Scripts/aic/aic.services.fileUpload.js"></script>
 
     <!-- Send Message -->
-    @*<script src="~/Scripts/sabio/sabio.services.user.js"></script>
-        <script src="~/Scripts/sabio/core/directives/sabio.directive.searchUser.js"></script>*@
+    @*<script src="~/Scripts/aic/aic.services.user.js"></script>
+        <script src="~/Scripts/aic/core/directives/aic.directive.searchUser.js"></script>*@
     <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
-    <script src="~/Scripts/sabio/core/directives/sabio.directive.sendMessage.js"></script>
-    <script src="~/Scripts/sabio/core/service-factories/sabio.service.factory.messages.js"></script>
-    <script src="~/Scripts/sabio/sabio.services.messages.js"></script>
+    <script src="~/Scripts/aic/core/directives/aic.directive.sendMessage.js"></script>
+    <script src="~/Scripts/aic/core/service-factories/aic.service.factory.messages.js"></script>
+    <script src="~/Scripts/aic/aic.services.messages.js"></script>
 
     <script>
         // MINIMIZE.... FILTER
-        angular.module('sabioApp').filter('cut', function () {
+        angular.module('aicApp').filter('cut', function () {
             return function (value, wordwise, max, tail) {
                 if (!value) return '';
 
