@@ -1,14 +1,14 @@
 ﻿(function () {
     "use strict";
 
-    angular.module('sabioApp')
+    angular.module('aicApp')
         .factory('$profilePageService', profilePageServiceFactory);
 
-    profilePageServiceFactory.$inject = ['$baseService', '$sabio']
+    profilePageServiceFactory.$inject = ['$baseService', '$aic']
 
-    function profilePageServiceFactory($baseService, $sabio) {
-        var aSabioServiceObject = sabio.services.profilePage;
-        var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+    function profilePageServiceFactory($baseService, $aic) {
+        var aAicServiceObject = aic.services.profilePage;
+        var newService = $baseService.merge(true, {}, aAicServiceObject, $baseService);
         return newService;
     }
 })();
