@@ -1,8 +1,8 @@
-﻿using Sabio.Web.Domain;
-using Sabio.Web.Models.Requests;
-using Sabio.Web.Models.Responses;
-using Sabio.Web.Models.ViewModels;
-using Sabio.Web.Services;
+﻿using aic.Web.Domain;
+using aic.Web.Models.Requests;
+using aic.Web.Models.Responses;
+using aic.Web.Models.ViewModels;
+using aic.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Sabio.Web.Controllers.Api
+namespace aic.Web.Controllers.Api
 {
     [RoutePrefix("api/profile")]
     public class ProfileAPIController : ApiController
@@ -37,7 +37,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.ProfileSelect";
+                error.ErrorFunction = "aic.Web.Controllers.Api.ProfileSelect";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
@@ -62,7 +62,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.ProfileSelectById";
+                error.ErrorFunction = "aic.Web.Controllers.Api.ProfileSelectById";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
@@ -87,7 +87,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.ProfileInsert";
+                error.ErrorFunction = "aic.Web.Controllers.Api.ProfileInsert";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
@@ -112,7 +112,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.ProfileUpdate";
+                error.ErrorFunction = "aic.Web.Controllers.Api.ProfileUpdate";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
@@ -138,7 +138,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.ProfileDelete";
+                error.ErrorFunction = "aic.Web.Controllers.Api.ProfileDelete";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
@@ -163,7 +163,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.ProfilePageSelect";
+                error.ErrorFunction = "aic.Web.Controllers.Api.ProfilePageSelect";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
@@ -189,7 +189,7 @@ namespace Sabio.Web.Controllers.Api
             {
                 ErrorLogService svc = new ErrorLogService();
                 ErrorLogAddRequest error = new ErrorLogAddRequest();
-                error.ErrorFunction = "Sabio.Web.Controllers.Api.GetReferralsPaginated";
+                error.ErrorFunction = "aic.Web.Controllers.Api.GetReferralsPaginated";
                 error.ErrorMessage = ex.Message;
                 error.UserId = UserService.UserSelect().PersonId;
                 svc.ErrorLogInsert(error);
