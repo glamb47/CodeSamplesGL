@@ -1,7 +1,7 @@
 ﻿ (function () {
     "use strict";
 
-    angular.module('sabioApp')
+    angular.module('aicApp')
         .controller('profilePageController', ProfilePageController)
 
     ProfilePageController.$inject = ['$scope', '$baseController', '$profilePageService', 'toastr', '$sce', "$userService", "$settingsService"];
@@ -22,7 +22,7 @@
         vm.aboutMode = true;
         vm.profile = {};
         vm.picUrl = "";
-        vm.userPersonId = sabio.page.personId;
+        vm.userPersonId = aic.page.personId;
 
         vm.getProfile = _getProfile;
         vm.getProfileSuccess = _getProfileSuccess;
@@ -33,7 +33,7 @@
         vm.showJob = _showJob;
         vm.editAbout = _editAbout;
         vm.onSettingsSuccess = _onSettingsSuccess;
-        vm.settings = sabio.page.settings;
+        vm.settings = aic.page.settings;
         vm.personId = parseInt($("#manageId").val());
         vm.searchUser = _searchUser;
         vm.searchQuery = null;
@@ -48,7 +48,7 @@
 
         function render() {
             console.log("rendering...")
-            if (sabio.page.personId != 0)
+            if (aic.page.personId != 0)
             {
                 vm.getProfile(vm.personId);
             }
@@ -64,7 +64,7 @@
                 vm.profile = data;
                 //console.log(vm.profile);
                 if (vm.profile.personPic) {
-                    vm.picUrl = "https://sabio-training.s3-us-west-2.amazonaws.com/C30/" + vm.profile.personPic;
+                    vm.picUrl = "https://aic-training.s3-us-west-2.amazonaws.com/C30/" + vm.profile.personPic;
                 }
                 else {
                     vm.picUrl = "/public-assets/images/people/defaultAvatar.jpg";
@@ -76,8 +76,8 @@
                         vm.jobBtn = true;
                     }
                 // profile guid
-                sabio.page.profileGuid = vm.profile.personGuid;
-                sabio.page.profileFullName = vm.profile.personFirstName + " " + vm.profile.personLastName;
+                aic.page.profileGuid = vm.profile.personGuid;
+                aic.page.profileFullName = vm.profile.personFirstName + " " + vm.profile.personLastName;
                 console.log(vm.profile);
             })
         }
@@ -155,7 +155,7 @@
 
         function _searchUser() {
             if (vm.searchQuery != null) {
-                vm.$userService.userSearchUser(vm.searchQuery, sabio.page.personId, _getSearchSuccess);
+                vm.$userService.userSearchUser(vm.searchQuery, aic.page.personId, _getSearchSuccess);
             }
             else {
                 $toastr.error("You didn't search anyone.");
