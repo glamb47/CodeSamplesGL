@@ -1,0 +1,463 @@
+ 
+ 
+ 
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+<title>Santa Barbara City College Pipeline Login</title>
+<script language="JavaScript" src="/js/clientsniffer.js"></script>
+<script language="JavaScript" src="/js/util.js"></script>
+<script language="javascript1.1">
+<!-- (hide from old browsers)
+var userpwdFocus = false;
+var hasRecovery = false
+function hadFocus(set)
+{
+    if (set) userpwdFocus = true;
+    return userpwdFocus;
+}
+
+function getCookie(name) 
+{
+    var search = name + "="
+    if (document.cookie.length > 0) 
+    {
+        // if there are any cookies
+        offset = document.cookie.indexOf(search)
+        if (offset != -1) 
+        { // if cookie exists
+            offset += search.length // set index of beginning of value
+            end = document.cookie.indexOf(";", offset) // set index of end of cookie value
+            if (end == -1)
+                end = document.cookie.length
+            return unescape(document.cookie.substring(offset, end))
+        }
+    }
+}
+
+function clearCache()
+{
+    var name="usid"
+    var value="chocolate-chip-cookies"
+    cookie= name + "=" + value + "; path=/; domain=.sbcc.edu; expires=" + (new Date(0)).toGMTString();
+    if (getCookie (name) != value) document.cookie = cookie;
+    doCancel();
+}
+
+function doCancel()
+{
+    document.userid.user.value='';
+    document.cplogin.user.value='';
+    document.cplogin.pass.value='';
+}
+
+function OpenWin(w)
+{
+    var unDefined;
+
+    if (w == "help")
+    {
+        stats='resizable=yes,toolbar=no,location=no,directories=no,status=yes,menubar=no,'
+        stats += 'scrollbars=yes,width=650,height=475';
+        helpWindow = window.open ("http://pipeline.sbcc.edu/site/loginhelp.html","helpWindow",stats)
+        setTimeout ("helpWindow.focus ()", 500);
+    }
+}
+
+function xferFocus()
+{
+    document.getElementById("pass").focus();
+}
+
+function login()
+{
+    setQueryAsCookie();
+    document.cookie = "ID=" + document.userid.user.value + "; path=/";
+    document.cplogin.user.value=document.userid.user.value;
+    document.cplogin.uuid.value="e507e61d-33ea-4904-bc09-0af071c15489";
+    document.cplogin.submit();
+}
+function setQueryAsCookie()
+{
+    var query = document.location.search;
+    if (query.length > 1) {
+        document.cookie = "query=" + encodeURIComponent(query) + "; path=/; domain=.sbcc.edu;"
+    } else {
+        // kill any previous query cookie setup
+        document.cookie = "query=; path=/; domain=.sbcc.edu; expires=" + (new Date(0)).toGMTString();
+    }
+}
+
+function pageLoad()
+{
+    if (!hadFocus(false))
+    {
+        document.getElementById("user").focus();
+    }
+    checkRecovery();
+}
+
+var size = "15";
+if ( ( is_nav4up || is_ie4up ) && is_mac ) { size = "12"; }
+else if ( is_nav4_7up) { size = "10"; }
+
+//-->
+</script>
+ 
+ 
+
+
+
+
+<link rel="stylesheet" href="/misc/style.css" type="text/css">
+<link rel="stylesheet" href="/custom/classic/custom.css" type="text/css">
+<link rel="stylesheet" href="/cp/content/style.css" type="text/css">
+
+
+
+</head>
+<body onLoad="pageLoad()">
+<div id="wrapper">
+  <div class="minwidth">
+    <div class="container">
+      <!--<div id="header">
+	    <DIV><html><head><title>Untitled Document</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head><body bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000000">  <tr>    <td width="743"><img src="/cps/images/pipeline_header_3_r1_c1.gif" height="124" width="743"></td><td ><img src="/cps/images/pipeline_header_3_r1_c2.gif" width="100%" height="124"></td>  </tr></table></body></html></DIV>
+      </div>!-->
+
+      <!-- *** *** -->
+      
+      
+      
+      <HTML><HEAD>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="description" content="SBCC Pipeline is the portal for Santa Barbara City College students and staff. Login to check email, view classes, or manage your campus accounts." />
+<meta name="keyword" content="SBCC pipeline,pipeline,SBCC,Santa Barbara City College,portal,account,register,email,calendar,contact,campus,login,classes" />
+<TITLE>Santa Barbara City College Pipeline Login</TITLE>
+<STYLE>
+ 
+BODY {color: #000000; font-family: verdana, helvetica, arial, sans-serif;background:url(/cps/images/newloginpage/sbcc_background.jpg) repeat-x;} /* must be its own class */
+
+.wrapper{
+margin-right:auto;
+margin-left:auto;
+width:743px;
+}
+
+.header {
+width:743px;
+}
+
+#PipelineImportantMessageDiv { /* CSS for Pipeline System Messages */
+padding: 5px 100px 5px 100px;
+background-color:#FFFF99;
+color:#FF6600;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+font-style:;
+font-weight:bold;
+text-align:center;
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+	/* For IE 8 */
+	-ms-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+	/* Firefox */
+	-moz-box-shadow: 3px 3px 15px #000;
+	/* WebKit */
+	-webkit-box-shadow: 3px 3px 15px #000;
+	/* Standard */
+	box-shadow: 3px 3px 15px #000;
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px; 
+	border-radius: 10px;
+}
+
+#mainContainerdiv {
+/*background-color:#F5F2E0;*/
+background-color:#ffffff; 
+width:743px; 
+height:460px;
+/* For IE 5.5 - 7 */
+filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+/* For IE 8 */
+-ms-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+/* Firefox */
+/-moz-box-shadow: 3px 3px 15px #000;
+/* WebKit */
+-webkit-box-shadow: 3px 3px 15px #000;
+/* Standard */
+box-shadow: 3px 3px 15px #000;
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; 
+border-radius: 15px 15px 15px 15px;
+}
+
+#loginbox{
+width:340px;
+height:150px;
+background-color:#93060F;
+padding-top:20px;
+padding-bottom:5px;
+border-style:solid;
+border-color:#FFFFFF;
+position:relative;
+float:right;
+top:20px;
+right:10px;
+left:-30px;
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+	/* For IE 8 */
+	-ms-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+	
+	/* Firefox */
+	-moz-box-shadow: 3px 3px 15px #000;
+	/* WebKit */
+	-webkit-box-shadow: 3px 3px 15px #000;
+	/* Standard */
+	box-shadow: 3px 3px 15px #000;
+	
+	-moz-border-radius: 15px; 
+	-webkit-border-radius: 15px; 
+	border-radius: 15px;
+}
+.pwstyle {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#fff;
+font-weight:bold;
+text-align:right;
+}
+
+
+#LoginButton {
+ position:relative;
+ width:95px;
+ height:30px;
+ left:40px;
+}
+
+
+#StartHereDiv{
+width:240px;
+height:370px;
+background-color:#F6F0D1;
+padding-top:25px;
+padding-right:25px;
+padding-left:25px;
+padding-bottom:25px;
+position:relative;
+float:left;
+top:20px;
+left:30px;
+/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+	/* For IE 8 */
+	-ms-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#000000');
+	/* Firefox */
+	-moz-box-shadow: 3px 3px 15px #000;
+	/* WebKit */
+	-webkit-box-shadow: 3px 3px 15px #000;
+	/* Standard */
+	box-shadow: 3px 3px 15px #000;
+	-moz-border-radius: 30px; 
+	-webkit-border-radius: 30px; 
+	border-radius: 30px;
+}
+
+#StartHereDiv a:link {
+color:#93060F;text-decoration:none
+}
+#StartHereDiv a:hover 
+{text-decoration:underline;
+}
+#StartHereDiv a:visited {
+color: #93060F; text-decoration:none;
+}
+
+#WhatsInside{
+width:340px;
+height:220px;
+background-color:#FFFFFF;
+position:relative;
+float:right;
+top: 50px;
+bottom: 50px;
+left:-30px;
+right: 10px;
+}
+#TableWhatsInside{
+background-color:#FFFFFF;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+color:#333333;
+font-size:10px;
+font-weight:600;
+}
+
+#footer {
+	font-family: Arial,Verdana,Helvetica,sans-serif;
+    font-size: 0.6em;
+	font-weight:bold;
+    background-color: #333333;
+    clear: both;
+    color: #C0131E;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    text-align: center;
+	width:743px;
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#000000');
+	/* For IE 8 */
+	-ms-filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#000000');
+	/* Firefox */
+	-moz-box-shadow: 3px 3px 3px #000;
+	/* WebKit */
+	-webkit-box-shadow: 3px 3px 3px #000;
+	/* Standard */
+	box-shadow: 3px 3px 3px #000;
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px; 
+	border-radius: 10px;	
+}
+#footer a:link{
+text-decoration:none;
+color:#FFFFFF;}
+#footer a:hover{
+color:#FFFFFF; 
+text-decoration:underline;}
+#footer a:visited{
+color:#FFFFFF;
+}
+
+</style>
+</head>
+
+<BODY marginwidth="0" marginheight="0" leftmargin="0" topmargin="0">
+<div class="wrapper">
+<div class="header">
+<img  src="/cps/images/newloginpage/pipelineHeaderEdit.jpg" alt="pipelineheader" border="0" usemap="#Map" >
+<map name="Map" id="Map">
+  <area shape="poly" coords="22,13,59,3,119,3,138,82,46,106" href="http://sbcc.edu" target="_blank" alt="SBCC Home" title="SBCC Home"/>
+</map>
+<!--<div id="PipelineImportantMessageDiv"><img src="/cps/images/newloginpage/maintenance-icon-red-triangle36.png" hspace="3" align="absmiddle" />PIPELINE MAINTENANCE (TEST)<br />
+Pipeline will be unavailable  from: <br />
+<br />
+12AM through 5PM<br />
+April 1, 2012
+</div>
+<br />!-->
+
+</div>
+<div id="mainContainerdiv">
+<div align="center" id="loginbox">
+<span style="font-size:14px; font-style:italic; color:#FFFFFF"><strong>Welcome to Pipeline!</strong></span><br />
+<br />
+<form style="margin-bottom:15px; font-size:13px;" name="userid" onSubmit="xferFocus(this); return false;"><label align="right" for="user" accesskey="u"><span class="pwstyle">Username: </span></label><input class="textform" id="user" name="user" tabindex="1" onFocus="hadFocus(true)" type="text" size="19"/></form>
+<form style="margin-bottom:15px; font-size:13px;" name="cplogin" action="https://pipeline.sbcc.edu/cp/home/login" onSubmit="login(); return false;" method="post"><label align="right" for="pass" accesskey="p"><span class="pwstyle">Password: </span></label><input name="pass" type="password" class="textform" id="pass" tabindex="2" onFocus="hadFocus(true)" size="19" maxlength="15"/><input type="hidden" name="user" value=""/><input type="hidden" name="uuid" value=""/></form>
+
+<div id="LoginButton"><a href="javascript:login();" onMouseOver="window.status=''; return 
+true;"><img src="/cps/images/newloginpage/LoginButton1.png" border="0" align="absmiddle" title="Login" tabindex="3" onload="clearCache()" /></a></div>
+</div>
+
+<div id="StartHereDiv">
+  <div style="font-size:22px; color:#990000; font-family:Verdana, Arial, Helvetica, sans-serif; text-align:center; padding-bottom:10px;"><strong>START HERE!</strong></div>
+
+<div style="font-size:11px; font-family:Verdana, Arial, Helvetica, sans-serif; text-align:left; padding-top:5px; padding-bottom:7px;"><img src="/cps/images/newloginpage/infoicon1.png" alt="info" hspace="4" vspace="4" border="0" align="left"><a href="#" onClick=javascript:window.open("http://pipeline.sbcc.edu/misc/hosted_html/FERPA_Message.html","blank","resizable=yes,toolbar=no,width=500,height=400")><strong><em>Message for parents, relatives, or guardians of students</em></strong></a></div>
+      
+<div style="font-size:10px; color:#990000; font-family:Verdana, Arial, Helvetica, sans-serif; text-align:left; padding-bottom: 3px;"><img src="/cps/images/newloginpage/rightredarrow1.png" alt="arrow" hspace="2" border="0" align="absmiddle"><a href="#" onClick=javascript:window.open("https://banner.sbcc.edu/PROD/SBCC_FindAccount.P_MainScreen","blank","resizable=yes,toolbar=no,width=500,height=400")>Find my username/reset password</a></div> 
+           
+<div style="font-size:10px; color:#990000; font-family:Verdana, Arial, Helvetica, sans-serif; text-align:left; padding-bottom: 3px;"><img src="/cps/images/newloginpage/rightredarrow1.png" alt="arrow" hspace="2" border="0" align="absmiddle"><a href="#" onClick=javascript:window.open("https://banner.sbcc.edu/PROD/SBCC_FindAccount.P_MainScreen","blank","resizable=yes,toolbar=no,width=500,height=400")>Forgot your username or password?</a></div>
+
+<div style="font-size:10px; color:#990000; font-family:Verdana, Arial, Helvetica, sans-serif; text-align:left; padding-bottom: 3px;"><img src="/cps/images/newloginpage/rightredarrow1.png" alt="arrow" hspace="2" border="0" align="absmiddle"><a href="#" onClick=javascript:window.open("https://banner.sbcc.edu/PROD/SBCC_FindAccount.P_MainScreen","blank","resizable=yes,toolbar=no,width=500,height=400")>Re-enable  account</a></div>
+
+<div style="font-size:10px; color:#990000; font-family:Verdana, Arial, Helvetica, sans-serif; text-align:left; padding-bottom: 3px;"><img src="/cps/images/newloginpage/rightredarrow1.png" alt="arrow" hspace="2" border="0" align="absmiddle"><a href="#" onClick=javascript:window.open("https://banner.sbcc.edu/PROD/SBCC_FindAccount_Span.P_MainScreen","blank","resizable=yes,toolbar=no,width=600,height=470")>B&uacute;squeda de usuario y contrase&ntilde;a</a></div>       
+
+<div style="font-size:10px; line-height:12px; color:#666666; font-family:Verdana; text-align:center; padding-bottom: 3px; padding-top:7px;">
+<strong>Questions about registration?</strong><br>
+<a href="http://sbcc.edu/admissions/common_problems.php" target="_blank">Common registration problems FAQ</a>
+<br>
+Call Admissions and Records<br>(805) 965-0581 x7222
+<br>
+<a href="http://sbcc.edu/admissions/" target="_blank">Admissions Hours of Operation</a>
+<br>
+<br>
+<strong>Log In Help:</strong>
+<br>
+<a href="http://www.sbcc.edu/sts/FAQs.php#PIPELINE" target="_blank">Common login problems FAQ</a>
+<br>
+Fill out the
+<br>
+<a href="http://support.sbcc.edu/contact" target="_blank">ONLINE TECH SUPPORT FORM</a><br>
+<em>-OR-</em>
+<br>
+Call Student Tech. Support: 
+<br>
+(805) 965-0581 x2949
+<br>
+<a href="http://sbcc.edu/sts/STS.php" target="_blank">Tech. Support Hours of Operation</a><br>
+</div>
+</div>
+<div id="WhatsInside">
+<table id="TableWhatsInside" width="100%" border="0" cellspacing="4" cellpadding="2">
+  <tr>
+    <td colspan="4"><span style="font-size:12px; color:#333333"><strong><em>What's Inside...</em></strong></span><br />
+      <br /></td>
+  </tr>
+  <tr>
+    <td><img src="/cps/images/newloginpage/sm_red_register.gif" alt="regicon" width="28" height="28"></td>
+    <td>Register, Add or Drop Classes</td>
+    <td><img src="/cps/images/newloginpage/sm_red_signin.gif" alt="signinicon" width="28" height="28"></td>
+    <td>Sign-in to Campus Systems</td>
+  </tr>
+  <tr>
+    <td><img src="/cps/images/newloginpage/sm_red_email.gif" alt="emailicon" width="28" height="28"></td>
+    <td>Check Campus email, Calendar...</td>
+    <td><img src="/cps/images/newloginpage/sm_red_events.gif" alt="newsicon" width="28" height="28"></td>
+    <td>View Campus News &amp; Events</td>
+  </tr>
+  <tr>
+    <td><img src="/cps/images/newloginpage/sm_red_contact.gif" alt="contacticon" width="28" height="28"></td>
+    <td>Contact Your Instructors</td>
+    <td><img src="/cps/images/newloginpage/sm_red_schedule.gif" alt="accounticon" width="27" height="28"></td>
+    <td>Manage Your Campus Account</td>
+  </tr>
+  <tr>
+    <td colspan="4"><div align="right"><span style="font-size:12px; color:#333333"><strong><em>
+      <br />
+      ...and more!</em></strong></span>
+    </div></td>
+  </tr>
+</table>
+
+</div>
+</div>
+<div id="footer"><a href="http://sbcc.edu/accessibilitystandards/index.php" target="_blank">Accessibility Standards</a> |<a href="http://sbcc.edu/disability.php" target="_blank"> Disability</a> | <a href="http://sbcc.edu/computerresources/sbccelectroniccommunications.php" target="_blank">Electronic Communication Policy</a> | <a href="http://sbcc.edu/computerresources/studentusepolicy.php" target="_blank">Student Use Policy</a> | <a href="http://sbcc.edu/security/standards_of_conduct.php" target="_blank">Student Standards of Conduct</a> | <a href="http://sbcc.edu/privacy.php" target="_blank"></a><a href="http://sbcc.edu/admissions/ferpastudentprivacy.php" target="_blank">Student Privacy</a></div>
+<br>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-463463-6', 'auto');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</div>  <!-- /.wrapper -->
+</BODY>
+</HTML>
+
+      
+      
+      <!-- *** *** -->
+    </div>
+  </div>
+</div>
+</body>
+</html>
